@@ -1,0 +1,59 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+name = "longsplat"
+version = "0.1.0"
+description = "LongSplat: Robust Unposed 3D Gaussian Splatting for Casual Long Videos"
+authors = [
+    {name = "Chin-Yang Lin", email = ""},
+    {name = "Cheng Sun", email = ""},
+    {name = "Fu-En Yang", email = ""},
+    {name = "Min-Hung Chen", email = ""},
+    {name = "Yen-Yu Lin", email = ""},
+    {name = "Yu-Lun Liu", email = ""},
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "torchvision",
+    "opencv-python",
+    "plyfile",
+    "huggingface-hub[torch]>=0.22",
+    "gradio",
+    "trimesh",
+    "matplotlib",
+    "scipy",
+    "roma",
+    "evo",
+    "tqdm",
+    "tensorboard",
+    "pyglet<2",
+    "gdown",
+    "imageio[ffmpeg]",
+    "cython",
+    "icecream",
+    "jaxtyping",
+    "laspy",
+    "einops",
+    "torch-scatter",
+    "torchmetrics",
+    "py3-wget",
+    "pytorch3d",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["longsplat/**"]
+
+[tool.hatch.build.targets.wheel]
+include = ["longsplat/**"]
+
+[tool.uv]
+# Disable build isolation for torch, torch-scatter, and pytorch3d to allow custom compilation
+no-build-isolation-package = ["torch", "torch-scatter", "pytorch3d"]
+
+[tool.uv.extra-build-dependencies]
+torch-scatter = ["torch"]
+pytorch3d = ["torch"]
